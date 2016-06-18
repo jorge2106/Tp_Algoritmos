@@ -5,6 +5,7 @@
  */
 package programadaalgoritmos;
 
+import Compresor.Compresor;
 import algoritmoHuffman.ManejadorHuffman;
 
 /**
@@ -20,10 +21,19 @@ public class ProgramadaAlgoritmos {
 
         algoritmoHuffman.ManejadorHuffman m = new ManejadorHuffman();
         String ASSCI_CHARACTERS = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~DELÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐└┴┬├─┼ãÃ╚╔╩╦╠═╬¤ðÐÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒõÕµþÞÚÛÙýÝ¯´≡±‗¾¶§÷¸°¨·¹³²■nbsp";
-        m.agregarALista(ASSCI_CHARACTERS);  
+        m.agregarALista(ASSCI_CHARACTERS);
         m.formarArbol();
         m.enOrden();
+
+        Compresor compresor = new Compresor();
+        String binario= "1011111101";
+        System.out.println("De binario a hexadecimal: "
+                + compresor.comprimirBinario(binario));
         
+        System.out.println("De hexadecimal a binario: " 
+                + compresor.descomprimirHexadecimal(compresor.comprimirBinario(binario)));
+        
+
     }
 
 }
