@@ -9,29 +9,29 @@ package Diccionario;
  *
  * @author Jorge
  */
-public class Codificacion {
+public class Codigo {
     
-    private Object cod;
-    private String letter;
+    private String codigo;
+    private Character letter;
 
-    public Codificacion(Object cod, String letter) {
-        this.cod = cod;
+    public Codigo(String codigo, Character letter) {
+        this.codigo = codigo;
         this.letter = letter;
     }
 
-    public Object getCod() {
-        return cod;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCod(Object cod) {
-        this.cod = cod;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getLetter() {
+    public Character getLetter() {
         return letter;
     }
 
-    public void setLetter(String letter) {
+    public void setLetter(Character letter) {
         this.letter = letter;
     }
     

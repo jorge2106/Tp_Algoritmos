@@ -11,34 +11,34 @@ package Diccionario;
  */
 public class ManejadorDiccionario {
 
-    private Nodo head;
-    private Nodo last;
-    private int counter;
+    private Nodo inicio;
+    private Nodo ultimo;
+    private int contador;
 
     public ManejadorDiccionario() {
-        counter = 0;
+        contador = 0;
     }
 
-    public boolean isEmpty() {
-        return counter == 0;
+    public boolean esVacio() {
+        return contador == 0;
     }
 
-    public void add(Codificacion data) {
+    public void agregar(Codigo data) {
         Nodo newNode = new Nodo(data);
-        if (isEmpty()) {
-            head = last = newNode;
+        if (esVacio()) {
+            inicio = ultimo = newNode;
         } else {
-            last.setNextNode(newNode);
-            last = newNode;
+            ultimo.setSiguiente(newNode);
+            ultimo = newNode;
         }
-        counter++;
+        contador++;
     }
 
-    public Object searchElement(String letter) {
+    public Codigo buscarElemento(String letra) {
         Nodo temp;
-        for (temp = head; temp != null; temp = temp.getNextNode()) {
-            if (temp.getData().getLetter().equals(letter)) {
-                return temp.getData().getCod();
+        for (temp = inicio; temp != null; temp = temp.getSiguiente()) {
+            if (temp.getCodigo().getLetter().equals(letra)) {
+                return temp.getCodigo();
             }
         }
         return null;

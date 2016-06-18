@@ -11,27 +11,27 @@ package Diccionario;
  */
 public class Nodo {
     
-    private Codificacion data;
-    private Nodo nextNode;
+    private Codigo codigo;
+    private Nodo siguiente;
 
-    public Nodo(Codificacion data) {
-        this.data = data;
-        nextNode = null;
+    public Nodo(Codigo codigo) {
+        this.codigo = codigo;
+        siguiente = null;
     }
 
-    public Codificacion getData() {
-        return data;
+    public Codigo getCodigo() {
+        return codigo;
     }
 
-    public Nodo getNextNode() {
-        return nextNode;
+    public Nodo getSiguiente() {
+        return siguiente;
     }
 
-    public void setData(Codificacion data) {
-        this.data = data;
+    public void setCodigo(Codigo codigo) {
+        this.codigo = codigo;
     }
 
-    public void setNextNode(Nodo node) {
-        this.nextNode = node;
+    public void setSiguiente(Nodo nodo) {
+        this.siguiente = nodo;
     }
 }
