@@ -6,6 +6,7 @@
 package Servidor;
 
 import Cliente.TP_ChatCliente;
+import algoritmoHuffman.ManejadorHuffman;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,6 +26,7 @@ public class TP_ChatServidor extends Thread {
     private ServerSocket server;
     private Socket connection;
     private final int PORT = 2048;
+    private ManejadorHuffman manejadorHuffman = new ManejadorHuffman();
 
     @Override
     public void run() {
@@ -35,7 +37,8 @@ public class TP_ChatServidor extends Thread {
             String msm = "";
             while (true) {
                 msm += (String) recibirMensaje();
-                VistaServidor.getCodView().setText(msm + "\n");
+                VistaServidor.getVistaCifrada().setText(msm + "\n");
+                VistaServidor.getVistaDescifrada().setText(manejadorHuffman.descifrarTexto(msm) + "\n");
             }
         } catch (IOException ex) {
             Logger.getLogger(TP_ChatServidor.class.getName()).log(Level.SEVERE, null, ex);

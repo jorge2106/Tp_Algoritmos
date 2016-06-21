@@ -5,6 +5,9 @@
  */
 package Servidor;
 
+import ArchivoBinario.Escritor;
+import ArchivoBinario.Lector;
+import algoritmoHuffman.ManejadorHuffman;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
@@ -15,17 +18,24 @@ import javax.swing.JTextArea;
 public class VistaServidor extends javax.swing.JFrame {
 
     private TP_ChatServidor servidor;
-    
+    private ManejadorHuffman manejadorHuffman = new ManejadorHuffman();
+    private Lector lectorArchivo = new Lector();
+    private Escritor escritorArchivo = new Escritor();
+
     public VistaServidor(TP_ChatServidor servidor) {
         initComponents();
         this.servidor = servidor;
         setLocationRelativeTo(null);
     }
 
-    public static JTextArea getCodView() {
-        return CodView;
+    public static JTextArea getVistaDescifrada() {
+        return vistaDescifrada;
     }
     
+    public static JTextArea getVistaCifrada() {
+        return vistaCifrada;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,46 +46,51 @@ public class VistaServidor extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        msmView = new javax.swing.JTextArea();
+        vistaCifrada = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        generarBt = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        CodView = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        vistaDescifrada = new javax.swing.JTextArea();
+        cargarBt = new javax.swing.JButton();
+        enviarBt = new javax.swing.JButton();
         msmClient = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        msmView.setEditable(false);
-        msmView.setColumns(20);
-        msmView.setRows(5);
-        jScrollPane1.setViewportView(msmView);
+        vistaCifrada.setEditable(false);
+        vistaCifrada.setColumns(20);
+        vistaCifrada.setRows(5);
+        jScrollPane1.setViewportView(vistaCifrada);
 
         jLabel1.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
         jLabel1.setText("Mensaje Cifrado");
 
-        jButton2.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
-        jButton2.setText("Generar Key");
-
-        CodView.setEditable(false);
-        CodView.setColumns(20);
-        CodView.setRows(5);
-        jScrollPane2.setViewportView(CodView);
-
-        jButton3.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
-        jButton3.setText("Cagar Key");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        generarBt.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        generarBt.setText("Generar Key");
+        generarBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                generarBtActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
-        jButton1.setText("Enviar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        vistaDescifrada.setEditable(false);
+        vistaDescifrada.setColumns(20);
+        vistaDescifrada.setRows(5);
+        jScrollPane2.setViewportView(vistaDescifrada);
+
+        cargarBt.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        cargarBt.setText("Cagar Key");
+        cargarBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cargarBtActionPerformed(evt);
+            }
+        });
+
+        enviarBt.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        enviarBt.setText("Enviar");
+        enviarBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarBtActionPerformed(evt);
             }
         });
 
@@ -92,12 +107,12 @@ public class VistaServidor extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(generarBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cargarBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(msmClient, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                                .addComponent(enviarBt, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,15 +128,15 @@ public class VistaServidor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(generarBt, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cargarBt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(enviarBt, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                     .addComponent(msmClient))
                 .addGap(8, 8, 8))
         );
@@ -129,27 +144,33 @@ public class VistaServidor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JFileChooser file = new JFileChooser();
-        int opcion = file.showOpenDialog(this);
+    private void cargarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarBtActionPerformed
+        JFileChooser selectorArchivos = new JFileChooser();
+        int opcion = selectorArchivos.showOpenDialog(this);
         if (opcion == JFileChooser.APPROVE_OPTION) {
-            String selectedFile = file.getSelectedFile().getPath();
+            String archivoSeleccionado = selectorArchivos.getSelectedFile().getPath();
+            manejadorHuffman.cargarLlave(lectorArchivo.obtenerLlave(archivoSeleccionado));
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_cargarBtActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        servidor.enviarMensaje(msmClient.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void enviarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtActionPerformed
+        String texto = manejadorHuffman.cifrarTexto(msmClient.getText());
+        servidor.enviarMensaje(texto);
+    }//GEN-LAST:event_enviarBtActionPerformed
+
+    private void generarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarBtActionPerformed
+        escritorArchivo.guardarLlave(manejadorHuffman.generarLlave());
+    }//GEN-LAST:event_generarBtActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JTextArea CodView;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cargarBt;
+    private javax.swing.JButton enviarBt;
+    private javax.swing.JButton generarBt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField msmClient;
-    private javax.swing.JTextArea msmView;
+    private static javax.swing.JTextArea vistaCifrada;
+    private static javax.swing.JTextArea vistaDescifrada;
     // End of variables declaration//GEN-END:variables
 }

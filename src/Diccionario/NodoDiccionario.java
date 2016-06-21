@@ -9,12 +9,12 @@ package Diccionario;
  *
  * @author Jorge
  */
-public class Nodo {
+public class NodoDiccionario {
     
     private Codigo codigo;
-    private Nodo siguiente;
+    private NodoDiccionario siguiente;
 
-    public Nodo(Codigo codigo) {
+    public NodoDiccionario(Codigo codigo) {
         this.codigo = codigo;
         siguiente = null;
     }
@@ -23,7 +23,7 @@ public class Nodo {
         return codigo;
     }
 
-    public Nodo getSiguiente() {
+    public NodoDiccionario getSiguiente() {
         return siguiente;
     }
 
@@ -31,7 +31,7 @@ public class Nodo {
         this.codigo = codigo;
     }
 
-    public void setSiguiente(Nodo nodo) {
+    public void setSiguiente(NodoDiccionario nodo) {
         this.siguiente = nodo;
     }
 }

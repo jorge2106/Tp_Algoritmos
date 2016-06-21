@@ -20,16 +20,12 @@ public class ProgramadaAlgoritmos {
     public static void main(String[] args) throws Exception {
 
         ManejadorHuffman manejadorHuffman = new ManejadorHuffman();
-        String CARACTERES_ASCII = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~DELÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐└┴┬├─┼ãÃ╚╔╩╦╠═╬¤ðÐÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒõÕµþÞÚÛÙýÝ¯´≡±‗¾¶§÷¸°¨·¹³²■nbsp";
-        manejadorHuffman.agregarALista(CARACTERES_ASCII);
-        manejadorHuffman.formarArbol();
-        manejadorHuffman.cifrarDiccionario();
-        String textoCifrado = manejadorHuffman.cifrarTexto("hola JUSTIN");
+        String textoCifrado = manejadorHuffman.cifrarTexto("hola JUSTIN como estas? Todo bien????");
         String textoDescifrado = manejadorHuffman.descifrarTexto(textoCifrado);
         System.out.println("Cifrado: " + textoCifrado + "\nDescifrado: " + textoDescifrado);
         
         Compresor compresor = new Compresor();
-
+        
     }
 
 }

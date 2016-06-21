@@ -18,15 +18,14 @@ public class ManejadorHuffman {
     private NodoLista inicio;
     private NodoLista ultimo;
     private int contador = 0;
+    private final String CARACTERES_ASCII = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~DELÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐└┴┬├─┼ãÃ╚╔╩╦╠═╬¤ðÐÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒõÕµþÞÚÛÙýÝ¯´≡±‗¾¶§÷¸°¨·¹³²■nbsp";
     private ManejadorDiccionario diccionario = new ManejadorDiccionario();
 
     public ManejadorHuffman() {
     }
 
-    public void agregarALista(String hilera) {
-
+    private void agregarALista(String hilera) {
         Random rnd = new Random();
-
         for (int i = 0; i < hilera.length(); i++) {
             agregar(hilera.charAt(i), rnd.nextInt(255));
             contador++;
@@ -44,17 +43,17 @@ public class ManejadorHuffman {
         }
     }
 
-    public void eliminarPrimero() {
+    private void eliminarPrimero() {
         inicio = inicio.getSiguiente();
         contador--;
     }
 
-    public NodoLista formarSubarbol(NodoLista nodo) {
+    private NodoLista formarSubarbol(NodoLista nodo) {
         int frecuencia = nodo.getArbol().getDato().getFrecuencia() + nodo.getSiguiente().getArbol().getDato().getFrecuencia();
         return new NodoLista(new NodoArbol(new Dato(null, frecuencia), nodo.getArbol(), nodo.getSiguiente().getArbol()));
     }
 
-    public void formarArbol() {
+    private void formarArbol() {
         while (contador >= 2) {
             NodoLista nuevo = formarSubarbol(inicio);
             eliminarPrimero();
@@ -73,6 +72,18 @@ public class ManejadorHuffman {
 
     public void enOrden() {
         enOrden(inicio.getArbol());
+    }
+    
+    public NodoArbol generarLlave() {
+        agregarALista(CARACTERES_ASCII);
+        formarArbol();
+        diccionario.crearDiccionario(inicio.getArbol());
+        return inicio.getArbol();
+    }
+    
+    public void cargarLlave(NodoArbol llave) {
+        inicio.setArbol(llave);
+        diccionario.crearDiccionario(llave);
     }
 
     private void insertarArbol(NodoLista nuevo) {
@@ -117,19 +128,6 @@ public class ManejadorHuffman {
             }
         }
         return hilera;
-    }
-    
-    public void cifrarDiccionario() {
-        cifrarDiccionario("", inicio.getArbol());
-    }
-
-    private void cifrarDiccionario(String codigo, NodoArbol arbol) {
-        if (arbol.getDato().getLetra() == null) {
-            cifrarDiccionario(codigo + "0", arbol.getIzquierda());
-            cifrarDiccionario(codigo + "1", arbol.getDerecha());
-        } else {
-            diccionario.agregar(new Codigo(codigo, arbol.getDato().getLetra()));
-        }
     }
 
     public String cifrarTexto(String texto) {

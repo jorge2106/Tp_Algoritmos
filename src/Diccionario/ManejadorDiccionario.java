@@ -5,21 +5,23 @@
  */
 package Diccionario;
 
+import algoritmoHuffman.NodoArbol;
+
 /**
  *
  * @author Jorge
  */
 public class ManejadorDiccionario {
 
-    private Nodo inicio;
-    private Nodo ultimo;
+    private NodoDiccionario inicio;
+    private NodoDiccionario ultimo;
 
-    public boolean esVacio() {
+    private boolean esVacio() {
         return inicio == null;
     }
 
-    public void agregar(Codigo data) {
-        Nodo nuevoNodo = new Nodo(data);
+    private void agregar(Codigo dato) {
+        NodoDiccionario nuevoNodo = new NodoDiccionario(dato);
         if (esVacio()) {
             inicio = ultimo = nuevoNodo;
         } else {
@@ -29,7 +31,7 @@ public class ManejadorDiccionario {
     }
 
     public String buscarLetra(Character letra) {
-        Nodo temp;
+        NodoDiccionario temp;
         for (temp = inicio; temp != null; temp = temp.getSiguiente()) {
             if (temp.getCodigo().getLetra() == letra.charValue()) {
                 return temp.getCodigo().getCodigoBinario();
@@ -39,12 +41,25 @@ public class ManejadorDiccionario {
     }
     
     public Character buscarCodigo(String codigo) {
-        Nodo temp;
+        NodoDiccionario temp;
         for (temp = inicio; temp != null; temp = temp.getSiguiente()) {
             if (temp.getCodigo().getCodigoBinario().equals(codigo)) {
                 return temp.getCodigo().getLetra();
             }
         }
         return null;
+    }
+    
+    private void crearDiccionario(String codigo, NodoArbol arbol) {
+        if (arbol.getDato().getLetra() == null) {
+            crearDiccionario(codigo + "0", arbol.getIzquierda());
+            crearDiccionario(codigo + "1", arbol.getDerecha());
+        } else {
+            agregar(new Codigo(codigo, arbol.getDato().getLetra()));
+        }
+    }
+    
+    public void crearDiccionario(NodoArbol arbol) {
+        crearDiccionario("", arbol);
     }
 }

@@ -5,12 +5,14 @@
  */
 package algoritmoHuffman;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Francisco
  */
-public class NodoArbol {
-  
+public class NodoArbol implements Serializable {
+
     private Dato dato;
     private NodoArbol izquierda;
     private NodoArbol derecha;
@@ -24,14 +26,12 @@ public class NodoArbol {
         this.derecha = null;
     }
 
-    
     public NodoArbol(Dato dato, NodoArbol izquierda, NodoArbol derecha) {
         this.dato = dato;
         this.izquierda = izquierda;
         this.derecha = derecha;
     }
 
-    
     /**
      * @return the dato
      */
@@ -73,6 +73,5 @@ public class NodoArbol {
     public void setDerecha(NodoArbol derecha) {
         this.derecha = derecha;
     }
-    
-    
+
 }
