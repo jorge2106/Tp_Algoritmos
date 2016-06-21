@@ -145,7 +145,7 @@ public class ManejadorHuffman {
         String texto = "";
         Character letra;
         for (int i = 0; i < codigo.length(); i++) {
-            temp = "" + codigo.charAt(i);
+            temp += codigo.charAt(i);
             letra = diccionario.buscarCodigo(temp);
             if (letra != null) {
                 texto += letra;
