@@ -35,7 +35,7 @@ public class TP_ChatCliente extends Thread {
             while (true) {
                 msm += (String) recibirMensaje();
                 VistaCliente.getVistaCifrada().setText(msm + "\n");
-                VistaCliente.getVistaCifrada().setText(manejadorHuffman.descifrarTexto(msm) + "\n");
+                VistaCliente.getVistaDescifrada().setText(manejadorHuffman.descifrarTexto(msm) + "\n");
             }
         } catch (IOException ex) {
             Logger.getLogger(TP_ChatCliente.class.getName()).log(Level.SEVERE, null, ex);

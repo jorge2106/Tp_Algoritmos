@@ -46,7 +46,7 @@ public class VistaCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         enviarBt = new javax.swing.JButton();
-        msmClient = new javax.swing.JTextField();
+        mensaje = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         vistaCifrada = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -58,6 +58,7 @@ public class VistaCliente extends javax.swing.JFrame {
         direcIp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         enviarBt.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
         enviarBt.setText("Enviar");
@@ -112,7 +113,7 @@ public class VistaCliente extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(msmClient, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(enviarBt, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -150,7 +151,7 @@ public class VistaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(enviarBt, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(msmClient))
+                    .addComponent(mensaje))
                 .addGap(8, 8, 8))
         );
 
@@ -167,8 +168,9 @@ public class VistaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarBtActionPerformed
 
     private void enviarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtActionPerformed
-        String texto = manejadorHuffman.cifrarTexto(msmClient.getText());
+        String texto = manejadorHuffman.cifrarTexto(mensaje.getText());
         cliente.enviarMensaje(texto);
+        mensaje.setText("");
     }//GEN-LAST:event_enviarBtActionPerformed
 
     private void generarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarBtActionPerformed
@@ -185,7 +187,7 @@ public class VistaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField msmClient;
+    private javax.swing.JTextField mensaje;
     private static javax.swing.JTextArea vistaCifrada;
     private static javax.swing.JTextArea vistaDescifrada;
     // End of variables declaration//GEN-END:variables

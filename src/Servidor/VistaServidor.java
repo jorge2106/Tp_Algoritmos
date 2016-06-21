@@ -53,9 +53,10 @@ public class VistaServidor extends javax.swing.JFrame {
         vistaDescifrada = new javax.swing.JTextArea();
         cargarBt = new javax.swing.JButton();
         enviarBt = new javax.swing.JButton();
-        msmClient = new javax.swing.JTextField();
+        mensaje = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         vistaCifrada.setEditable(false);
         vistaCifrada.setColumns(20);
@@ -110,7 +111,7 @@ public class VistaServidor extends javax.swing.JFrame {
                                     .addComponent(generarBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cargarBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(msmClient, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(enviarBt, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
                         .addGap(16, 16, 16))
@@ -137,7 +138,7 @@ public class VistaServidor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(enviarBt, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(msmClient))
+                    .addComponent(mensaje))
                 .addGap(8, 8, 8))
         );
 
@@ -154,8 +155,9 @@ public class VistaServidor extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarBtActionPerformed
 
     private void enviarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtActionPerformed
-        String texto = manejadorHuffman.cifrarTexto(msmClient.getText());
+        String texto = manejadorHuffman.cifrarTexto(mensaje.getText());
         servidor.enviarMensaje(texto);
+        mensaje.setText("");
     }//GEN-LAST:event_enviarBtActionPerformed
 
     private void generarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarBtActionPerformed
@@ -169,7 +171,7 @@ public class VistaServidor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField msmClient;
+    private javax.swing.JTextField mensaje;
     private static javax.swing.JTextArea vistaCifrada;
     private static javax.swing.JTextArea vistaDescifrada;
     // End of variables declaration//GEN-END:variables
