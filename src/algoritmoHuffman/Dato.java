@@ -5,11 +5,13 @@
  */
 package algoritmoHuffman;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Francisco
  */
-public class Dato {
+public class Dato implements Serializable{
     private Character letra;
     private int frecuencia;
 

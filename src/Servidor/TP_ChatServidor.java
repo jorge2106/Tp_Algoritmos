@@ -36,8 +36,8 @@ public class TP_ChatServidor extends Thread {
             inicializarFlujos();
             String msm = "";
             while (true) {
-                msm += (String) recibirMensaje();
-                VistaServidor.getVistaCifrada().setText(msm + "\n");
+                msm += (String) recibirMensaje() + "\n";
+                VistaServidor.getVistaCifrada().setText(msm);
                 VistaServidor.getVistaDescifrada().setText(manejadorHuffman.descifrarTexto(msm) + "\n");
             }
         } catch (IOException ex) {

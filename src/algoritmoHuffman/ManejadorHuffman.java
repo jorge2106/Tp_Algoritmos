@@ -5,7 +5,6 @@
  */
 package algoritmoHuffman;
 
-import Diccionario.Codigo;
 import Diccionario.ManejadorDiccionario;
 import java.util.Random;
 
@@ -73,16 +72,16 @@ public class ManejadorHuffman {
     public void enOrden() {
         enOrden(inicio.getArbol());
     }
-    
+
     public NodoArbol generarLlave() {
         agregarALista(CARACTERES_ASCII);
         formarArbol();
         diccionario.crearDiccionario(inicio.getArbol());
         return inicio.getArbol();
     }
-    
+
     public void cargarLlave(NodoArbol llave) {
-        inicio.setArbol(llave);
+        NodoArbol arbol = llave;
         diccionario.crearDiccionario(llave);
     }
 
