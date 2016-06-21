@@ -9,19 +9,16 @@ package algoritmoHuffman;
  *
  * @author Francisco
  */
-public class Dato {
+public class Dato{
+
     private Character letra;
     private int frecuencia;
-
-    public Dato() {
-    }
-    
 
     public Dato(Character letra, int frecuencia) {
         this.letra = letra;
         this.frecuencia = frecuencia;
     }
-    
+
     /**
      * @return the letra
      */
@@ -49,6 +46,4 @@ public class Dato {
     public void setFrecuencia(int frecuencia) {
         this.frecuencia = frecuencia;
     }
-    
-    
 }

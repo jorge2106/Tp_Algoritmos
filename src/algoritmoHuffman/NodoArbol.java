@@ -11,14 +11,11 @@ import java.io.Serializable;
  *
  * @author Francisco
  */
-public class NodoArbol implements Serializable {
+public class NodoArbol implements Serializable{
 
     private Dato dato;
     private NodoArbol izquierda;
     private NodoArbol derecha;
-
-    public NodoArbol() {
-    }
 
     public NodoArbol(Dato dato) {
         this.dato = dato;
