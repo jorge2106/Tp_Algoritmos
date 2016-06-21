@@ -5,6 +5,8 @@
  */
 package algoritmoHuffman;
 
+import Diccionario.Codigo;
+import Diccionario.ManejadorDiccionario;
 import java.util.Random;
 
 /**
@@ -16,6 +18,7 @@ public class ManejadorHuffman {
     private NodoLista inicio;
     private NodoLista ultimo;
     private int contador = 0;
+    private ManejadorDiccionario diccionario = new ManejadorDiccionario();
 
     public ManejadorHuffman() {
     }
@@ -25,7 +28,7 @@ public class ManejadorHuffman {
         Random rnd = new Random();
 
         for (int i = 0; i < hilera.length(); i++) {
-            agregar(hilera.charAt(i), 1);
+            agregar(hilera.charAt(i), rnd.nextInt(255));
             contador++;
         }
     }
@@ -114,5 +117,41 @@ public class ManejadorHuffman {
             }
         }
         return hilera;
+    }
+    
+    public void cifrarDiccionario() {
+        cifrarDiccionario("", inicio.getArbol());
+    }
+
+    private void cifrarDiccionario(String codigo, NodoArbol arbol) {
+        if (arbol.getDato().getLetra() == null) {
+            cifrarDiccionario(codigo + "0", arbol.getIzquierda());
+            cifrarDiccionario(codigo + "1", arbol.getDerecha());
+        } else {
+            diccionario.agregar(new Codigo(codigo, arbol.getDato().getLetra()));
+        }
+    }
+
+    public String cifrarTexto(String texto) {
+        String codigoTexto = "";
+        for (int i = 0; i < texto.length(); i++) {
+            codigoTexto += diccionario.buscarLetra(texto.charAt(i));
+        }
+        return codigoTexto;
+    }
+
+    public String descifrarTexto(String codigo) {
+        String temp = "";
+        String texto = "";
+        Character letra;
+        for (int i = 0; i < codigo.length(); i++) {
+            temp = "" + codigo.charAt(i);
+            letra = diccionario.buscarCodigo(temp);
+            if (letra != null) {
+                texto += letra;
+                temp = "";
+            }
+        }
+        return texto;
     }
 }

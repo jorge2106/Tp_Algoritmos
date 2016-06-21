@@ -19,20 +19,15 @@ public class ProgramadaAlgoritmos {
      */
     public static void main(String[] args) throws Exception {
 
-        algoritmoHuffman.ManejadorHuffman m = new ManejadorHuffman();
-        String ASSCI_CHARACTERS = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~DELÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐└┴┬├─┼ãÃ╚╔╩╦╠═╬¤ðÐÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒõÕµþÞÚÛÙýÝ¯´≡±‗¾¶§÷¸°¨·¹³²■nbsp";
-        m.agregarALista(ASSCI_CHARACTERS);
-        m.formarArbol();
-        m.enOrden();
-
+        ManejadorHuffman manejadorHuffman = new ManejadorHuffman();
+        String CARACTERES_ASCII = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~DELÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐└┴┬├─┼ãÃ╚╔╩╦╠═╬¤ðÐÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒõÕµþÞÚÛÙýÝ¯´≡±‗¾¶§÷¸°¨·¹³²■nbsp";
+        manejadorHuffman.agregarALista(CARACTERES_ASCII);
+        manejadorHuffman.formarArbol();
+        manejadorHuffman.cifrarDiccionario();
+        String textoCifrado = manejadorHuffman.descifrarTexto("hola");
+        String textoDescifrado = manejadorHuffman.descifrarTexto(textoCifrado);
+        System.out.println("Cifrado: " + textoCifrado + "\nDescifrado: " + textoDescifrado);
         Compresor compresor = new Compresor();
-        String binario= "1011111101";
-        System.out.println("De binario a hexadecimal: "
-                + compresor.comprimirBinario(binario));
-        
-        System.out.println("De hexadecimal a binario: " 
-                + compresor.descomprimirHexadecimal(compresor.comprimirBinario(binario)));
-        
 
     }
 

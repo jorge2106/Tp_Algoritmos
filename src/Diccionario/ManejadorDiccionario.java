@@ -13,32 +13,36 @@ public class ManejadorDiccionario {
 
     private Nodo inicio;
     private Nodo ultimo;
-    private int contador;
-
-    public ManejadorDiccionario() {
-        contador = 0;
-    }
 
     public boolean esVacio() {
-        return contador == 0;
+        return inicio == null;
     }
 
     public void agregar(Codigo data) {
-        Nodo newNode = new Nodo(data);
+        Nodo nuevoNodo = new Nodo(data);
         if (esVacio()) {
-            inicio = ultimo = newNode;
+            inicio = ultimo = nuevoNodo;
         } else {
-            ultimo.setSiguiente(newNode);
-            ultimo = newNode;
+            ultimo.setSiguiente(nuevoNodo);
+            ultimo = nuevoNodo;
         }
-        contador++;
     }
 
-    public Codigo buscarElemento(String letra) {
+    public String buscarLetra(Character letra) {
         Nodo temp;
         for (temp = inicio; temp != null; temp = temp.getSiguiente()) {
-            if (temp.getCodigo().getLetter().equals(letra)) {
-                return temp.getCodigo();
+            if (temp.getCodigo().getLetra() == letra.charValue()) {
+                return temp.getCodigo().getCodigoBinario();
+            }
+        }
+        return null;
+    }
+    
+    public Character buscarCodigo(String codigo) {
+        Nodo temp;
+        for (temp = inicio; temp != null; temp = temp.getSiguiente()) {
+            if (temp.getCodigo().getCodigoBinario().equals(codigo)) {
+                return temp.getCodigo().getLetra();
             }
         }
         return null;

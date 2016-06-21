@@ -11,29 +11,27 @@ package Diccionario;
  */
 public class Codigo {
     
-    private String codigo;
-    private Character letter;
+    private String codigoBinario;
+    private Character letra;
 
-    public Codigo(String codigo, Character letter) {
-        this.codigo = codigo;
-        this.letter = letter;
+    public Codigo(String codigoBinario, Character letra) {
+        this.codigoBinario = codigoBinario;
+        this.letra = letra;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoBinario() {
+        return codigoBinario;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoBinario(String codigoBinario) {
+        this.codigoBinario = codigoBinario;
     }
 
-    public Character getLetter() {
-        return letter;
+    public Character getLetra() {
+        return letra;
     }
 
-    public void setLetter(Character letter) {
-        this.letter = letter;
-    }
-    
-        
+    public void setLetra(Character letra) {
+        this.letra = letra;
+    }    
 }
