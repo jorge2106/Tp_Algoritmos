@@ -26,6 +26,8 @@ public class ProgramadaAlgoritmos {
         
         Compresor compresor = new Compresor();
         
+        System.err.println("arbol");
+        
     }
 
 }
